@@ -1,7 +1,7 @@
 //initial config
 const express = require("express");
 const app = express();
-const Person = require("./models/Person");
+
 const mongoose = require("mongoose");
 
 //read JSON / middlewares
@@ -14,27 +14,10 @@ app.use(
 app.use(express.json());
 
 //API routes
-app.post("/person", async (req, res) => {
-  const { name, salary, approved } = req.body;
 
-  if (!name) {
-    res.status(422).json({ error: "write one name" });
-  }
+const personRoutes = require("./routes/person.Routes");
 
-  const person = {
-    name,
-    salary,
-    approved,
-  };
-
-  try {
-    await Person.create(person);
-    res.status(201).json({ message: "person created successsfully!!!" });
-  } catch (error) {
-    console.error("error creating person", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+app.use("/person", personRoutes);
 
 //create initial endpoint
 app.get("/", (req, res) => {
