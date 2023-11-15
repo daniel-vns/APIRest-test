@@ -1,10 +1,8 @@
 //initial config
 const express = require("express");
 const app = express();
-
-const mongoose = require("mongoose");
-
 const Person = require("./models/Person");
+const mongoose = require("mongoose");
 
 //read JSON / middlewares
 app.use(
@@ -31,16 +29,16 @@ app.post("/person", async (req, res) => {
 
   try {
     await Person.create(person);
-
     res.status(201).json({ message: "person created successsfully!!!" });
   } catch (error) {
-    res.status(500).json({ error: error });
+    console.error("error creating person", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
 //create initial endpoint
 app.get("/", (req, res) => {
-  res.json({ message: "hello express!" });
+  res.json({ message: "hello express!!!" });
 });
 
 //PORT
