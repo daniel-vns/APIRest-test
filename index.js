@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
 //PORT
 mongoose
   .connect(
-    "mongodb+srv://daniel:daniel123@apicluster.g7se9jl.mongodb.net/?retryWrites=true&w=majority"
+    "mongodb+srv://daniel:daniel123@cluster0.9dnbpuk.mongodb.net/?retryWrites=true&w=majority"
   )
   .then(() => {
     console.log("connected to mongoDB");
