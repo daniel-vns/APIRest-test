@@ -1,11 +1,12 @@
 //initial config
 const express = require("express");
+const { default: mongoose } = require("mongoose");
 const app = express();
 
 //read JSON / middlewares
 app.use(
   express.urlencoded({
-    extnded: true,
+    extended: true,
   })
 );
 
@@ -17,4 +18,12 @@ app.get("/", (req, res) => {
 });
 
 //PORT
-app.listen(3000);
+mongoose
+  .connect(
+    "mongodb+srv://daniel:daniel123@apicluster.g7se9jl.mongodb.net/?retryWrites=true&w=majority"
+  )
+  .then(() => {
+    console.log("connected to mongoDB");
+    app.listen(3000);
+  })
+  .catch((err) => console.log(err));
